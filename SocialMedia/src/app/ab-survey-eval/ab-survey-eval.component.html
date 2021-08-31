@@ -1,0 +1,27 @@
+<div style="margin-right:10%; margin-left:10%;">
+    <div *ngFor="let page of surveyAJson.pages">
+        <h2>{{page.title}}</h2>
+        <ol start="0">
+            <li *ngFor="let element of page.elements">
+                <h3 [innerHTML]="element.html"></h3>
+                <h3 [innerHTML]="element.title"></h3>
+
+                <div *ngIf="element.type =='rating'">
+                    {{element.minRateDescription}}
+
+                </div>
+                <div *ngFor="let result of evalJsonData[element.name] | keyvalue">
+
+                    {{getEvalStats(result, element)}}
+                </div>
+
+                <div *ngIf="element.type =='rating'">
+                    {{element.maxRateDescription}}
+                </div>
+                <hr>
+            </li>
+
+        </ol>
+        <br>
+    </div>
+</div>

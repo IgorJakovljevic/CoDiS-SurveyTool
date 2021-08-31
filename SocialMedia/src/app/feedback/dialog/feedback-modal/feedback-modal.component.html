@@ -1,0 +1,16 @@
+<h1 mat-dialog-title translate>feedback.modal.title</h1>
+<div mat-dialog-content>
+    <form class="full-width">
+        <textarea class="full-width" matInput rows="12" [(ngModel)]="feedbackText" name="feedbackText"
+            placeholder="{{ 'feedback.modal.text' | translate }}"></textarea>
+
+    </form>
+</div>
+<div align="end" mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">
+        <span translate>modal.close</span>
+    </button>
+    <button [disabled]="feedbackText.length == 0" mat-raised-button color="primary" (click)="submit()">
+        <span translate>modal.submit</span>
+    </button>
+</div>

@@ -1,0 +1,30 @@
+.ck-editor__top{
+    display: none !important;
+}
+
+
+
+.endIcon {
+    margin-top:12%;
+    max-width: 155px;
+    animation: pulse 10s infinite;
+}
+
+  @keyframes pulse {
+    0% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    50%{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    75% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    100% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+  }

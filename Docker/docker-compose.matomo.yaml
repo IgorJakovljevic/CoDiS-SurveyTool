@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+  matomo:
+    container_name: matomo
+    image: matomo
+    ports:
+      - 8080:80
+    environment:
+      - MATOMO_DATABASE_HOST=matomo_db
+      - VIRTUAL_HOST=stats.mysite.ext
+      - LETSENCRYPT_HOST=stats.mysite.ext
+      - LETSENCRYPT_EMAIL=email@something.ext
+    env_file:
+      - ./db.env
+    networks:
+      - default
+    depends_on:
+      - matomo_db
+    restart: unless-stopped
+
+  matomo_db:
+    container_name: matomo_db
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    env_file:
+      - ./db.env
+    networks:
+      - default
+    restart: unless-stopped
+
+networks:
+  default:

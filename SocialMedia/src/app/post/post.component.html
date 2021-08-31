@@ -1,0 +1,28 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title> {{post.title}} </mat-card-title>
+        <mat-card-subtitle>{{post.text}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-body">
+        <div style="padding:1em">
+            <mat-chip-list [selectable]="false">
+                <mat-chip *ngFor="let tag of post.tags">{{tag}}</mat-chip>
+            </mat-chip-list>
+        </div>
+        <div style="padding: 0px 1em 0px 1em ">
+
+            <mat-icon matTooltip="{{post.privacy.description}}">{{post.privacy.icon}}</mat-icon>
+            <mat-icon matTooltip="{{post.sentiment}}" style="margin-left:0.5em" color="warn">
+                {{post.sentiment}}
+            </mat-icon>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button *ngIf="post.commenting" color="primary" mat-button>
+            <mat-icon>comment</mat-icon>
+        </button>
+        <button *ngIf="post.sharing" color="primary" mat-button>
+            <mat-icon>share</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

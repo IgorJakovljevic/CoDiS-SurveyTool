@@ -1,0 +1,7 @@
+/env
+/SocialMedia/node_modules
+/SocialMedia/dist
+/SocialMediaServer/.vscode
+/SocialMediaServer/node_modules
+/SocialMediaServer/.env
+

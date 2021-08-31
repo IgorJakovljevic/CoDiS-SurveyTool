@@ -1,0 +1,58 @@
+<h1 mat-dialog-title translate>notification.new.title</h1>
+<div mat-dialog-content>
+    <form class="full-width">
+        <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="notification.title" name="titleText"
+                placeholder="{{ 'notification.notificationTitle' | translate }}" />
+        </mat-form-field>
+        <div class="full-width">
+            <mat-slide-toggle (change)="codeMode = !codeMode" style="padding-bottom: 1em; padding-top: 1em;"
+                color="primary">
+                <span translate>action.codeMode</span>
+            </mat-slide-toggle>
+            <ckeditor [style.display]="!codeMode ? 'block' : 'none'" [config]="editorConfig" [editor]="Editor"
+                [(ngModel)]="notification.text" name="notification.text"></ckeditor>
+            <textarea [style.display]="codeMode ? 'block' : 'none'" matInput rows="12" [(ngModel)]="notification.text"
+                name="notification.text" placeholder="{{ 'notification.new.notificationText' | translate }}"></textarea>
+
+        </div>
+        <mat-form-field class="full-width">
+            <mat-label translate>notification.hideAfter</mat-label>
+            <input matInput [(ngModel)]="notification.hideTimeout" name="hideTimeout" type="number" />
+            <span matSuffix> ms</span>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label translate>notification.screenPosition</mat-label>
+            <mat-select [(value)]="notification.positionClass">
+                <mat-option [value]="option.key" *ngFor="let option of screenPositions">{{ option.value }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label translate>notification.bacgroundcolor</mat-label>
+            <mat-select [(value)]="notification.toastClass">
+                <mat-option [value]="toastClass" *ngFor="let toastClass of toastClasses">{{ toastClass }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label translate>notification.relatedTags</mat-label>
+            <mat-chip-list #tagList>
+                <mat-chip *ngFor="let tag of notification.tags" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(tag)">
+                    {{tag}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="{{ 'notification.newTag' | translate }}" #tagInput [matChipInputFor]="tagList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">
+        <span translate>modal.close</span>
+    </button>
+    <button *ngIf="!edit" mat-button color="primary" [mat-dialog-close]="notification" cdkFocusInitial>
+        <span translate>modal.add</span>
+    </button>
+</div>

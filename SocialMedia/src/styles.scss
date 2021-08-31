@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+// regular style toast
+@import '~ngx-toastr/toastr';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+.logoIcon{
+  max-height: 100%;
+
+  background-color: white;
+  border-radius: 10px;
+  transition: transform .2s ease-in-out;
+  &:hover {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+  }
+}
+
+.toast-info{
+  background: #f44 !important;
+  color: white  !important;
+  padding: 15px !important;
+}
+
+
+.red-theme{
+  background: red !important;
+  color: white  !important;
+}
+.blue-theme{
+  background: blue !important;
+  color: white !important;
+}
+.gray-theme{
+  background: gray !important;
+  color: black !important;
+}
+.green-theme{
+  background: green !important;
+  color: black !important;
+}
+.black-theme{
+  background: black !important;
+  color: white !important;
+}
+
+html, body { height: 100%; min-height: 100vh; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+app-sharepost, app-post, .app-card{
+    width: 70% !important;
+  }
+
+
+.full-width {
+  width: 100%;
+}
+
+.fa, .fab, .fas {
+  font-size: 22px;
+}
+
+.ck-read-only {
+  border: 0px !important;
+}
+
+.disabled-text{
+  text-decoration: line-through !important;
+}
+
+.container{
+  padding-bottom:3em;
+  min-height: 95vh;
+}
+
+app-footer{
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+

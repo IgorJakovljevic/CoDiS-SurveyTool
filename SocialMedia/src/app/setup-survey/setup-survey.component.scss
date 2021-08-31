@@ -1,0 +1,26 @@
+
+.full-width {
+    width: 100%;
+  }
+.half-width{
+  width:50%;
+}
+
+  table {
+    width: 100%;
+  }
+
+  .mat-header-cell, .mat-cell {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    max-width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }

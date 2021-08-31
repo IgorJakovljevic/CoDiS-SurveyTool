@@ -1,0 +1,131 @@
+<h1 mat-dialog-title translate>article.new.title</h1>
+<div mat-dialog-content>
+    <form class="full-width">
+        <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="post.title" name="titleText"
+                placeholder="{{ 'article.new.articleTitle' | translate }}" />
+        </mat-form-field>
+        <div class="full-width">
+
+            <mat-slide-toggle (change)="codeMode = !codeMode" style="padding-bottom: 1em; padding-top: 1em;"
+                color="primary">
+                <span translate>action.codeMode</span>
+            </mat-slide-toggle>
+            <ckeditor [style.display]="!codeMode ? 'block' : 'none'" [config]="editorConfig" [editor]="Editor"
+                [(ngModel)]="post.text" name="post.text"></ckeditor>
+            <textarea [style.display]="codeMode ? 'block' : 'none'" matInput rows="12" [(ngModel)]="post.text"
+                name="post.text" placeholder="{{ 'article.new.articleText' | translate }}"></textarea>
+        </div>
+        <mat-form-field class="full-width">
+            <mat-label translate>article.new.relatedtag</mat-label>
+            <mat-chip-list #tagList>
+                <mat-chip selected [color]="'primary'" *ngFor="let tag of post.tags" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(tag)">
+                    {{tag.text}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input autocomplete="off" placeholder="{{ 'article.new.newTag' | translate }}" #tagInput
+                    [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <div *ngIf="filtertags().length > 0">
+                <br>
+                <br>
+                <br>
+                <mat-chip selected *ngFor="let tag of filtertags()" [color]="'accent'" (removed)="addTag(tag)">
+                    {{tag.text}}
+                    <mat-icon matChipRemove>add</mat-icon>
+                </mat-chip>
+            </div>
+        </mat-form-field>
+
+        <div class="full-width">
+            <button style="margin-bottom:1em;" (click)="addTask()" mat-raised-button>
+                <mat-icon>add_box</mat-icon>
+                <span translate>task.add</span>
+            </button>
+            <br>
+        </div>
+
+        <div *ngFor="let task of post.tasks; let i = index; trackBy:trackByfn" class="full-width">
+            <mat-form-field class="full-width">
+                <mat-icon style="cursor: pointer;" (click)="deleteTask(i)" matSuffix>delete</mat-icon>
+                <input matInput [value]="post.tasks[i].text" [(ngModel)]="post.tasks[i].text" name="task-text-{{i}}">
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-label translate>sentiment.title</mat-label>
+            <button mat-button [matMenuTriggerFor]="menuSentiment">
+                <span *ngIf="!this.post.sentiment" translate>sentiment.select</span>
+                <mat-icon *ngIf="this.post.sentiment" [style.color]="post.sentiment.color">{{post.sentiment.icon}}
+                </mat-icon>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menuSentiment="matMenu">
+                <button (click)="setSentiment(el)" *ngFor="let el of sentiment" mat-menu-item>
+                    <mat-icon [style.color]="el.color">{{el.icon}}</mat-icon>
+                    <span> - {{el.description}}</span>
+                </button>
+            </mat-menu>
+
+        </div>
+
+        <div class="full-width">
+            <mat-label translate>privacy.title</mat-label>
+            <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon *ngIf="post.privacy">{{post.privacy.icon}}</mat-icon>
+                <span *ngIf="post.privacy">{{post.privacy.name}}</span>
+
+                <span *ngIf="!post.privacy" translate>privacy.select</span>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="setPrivacy(el)" *ngFor="let el of privacySelection" mat-menu-item>
+                    <mat-icon>{{el.icon}}</mat-icon>
+                    <span>{{el.name}} - {{el.description}}</span>
+                </button>
+            </mat-menu>
+        </div>
+
+        <div class="full-width">
+            <mat-label> </mat-label>
+            <mat-checkbox color="primary" [(ngModel)]="post.sharing" name="sharing">
+                <span translate>sharing.title</span>
+            </mat-checkbox>
+            <br>
+        </div>
+
+        <div class="full-width">
+            <mat-label> </mat-label>
+            <mat-checkbox color="primary" [(ngModel)]="post.commenting" name="commenting">
+                <span translate>commenting.title</span>
+            </mat-checkbox>
+            <br>
+        </div>
+
+        <div class="full-width">
+            <mat-label> </mat-label>
+            <mat-checkbox color="primary" [(ngModel)]="post.tweeting" name="commenting" translate>
+                <span translate>tweeting.title</span>
+            </mat-checkbox>
+            <br>
+        </div>
+
+        <div class="full-width">
+            <mat-checkbox color="primary" [(ngModel)]="post.retweeting" name="commenting">
+                <span translate>retweeting.title</span>
+            </mat-checkbox>
+            <br>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">
+        <span translate>modal.close</span>
+    </button>
+    <button *ngIf="!edit" mat-button color="primary" [mat-dialog-close]="post" cdkFocusInitial>
+        <span translate>modal.add</span>
+    </button>
+</div>

@@ -1,0 +1,177 @@
+{
+	"action": {
+		"back": "Back",
+		"codeMode": "Source Code Mode",
+		"comment": "Comment",
+		"createSurvey": "Create Survey",
+		"delete": "Delete",
+		"done": "Done",
+		"evaluation": "Evaluation",
+		"next": "Next",
+		"post": "Post",
+		"submit": "Submit",
+		"tobeimplemented": "Not Implemented in This Version",
+		"updateSurvey": "Update Survey",
+		"viewSurvey": "View Survey"
+	},
+	"article": {
+		"new": {
+			"articleText": "Article Text",
+			"articleTitle": "Article Title",
+			"newTag": "New Tag ...",
+			"relatedtag": "Related Tags",
+			"title": "New Article"
+		},
+		"whatsOnYourMind": "What's on your mind?"
+	},
+	"auth": {
+		"login": "Login",
+		"password": "Password",
+		"provideValidEmail": "Please Provide Valid Email",
+		"provideValidPassword": "Please Provide Valid Password",
+		"username": "Username",
+		"usernameOrPasswordWrong": "Username or Password Wrong"
+	},
+	"comment": {
+		"edit": "Edit Comment",
+		"whatDoYouThink": "What do you think?"
+	},
+	"commenting": {
+		"title": "Commenting"
+	},
+	"create": {
+		"survey": {
+			"information": "Information",
+			"title": "Create Survey"
+		}
+	},
+	"dashboard": {
+		"actions": "Actions",
+		"deletesurvey": "Delete Survey",
+		"duplicatesurvey": "Duplicate Survey",
+		"editSurvey": "Edit Survey",
+		"exportData": "Export Data",
+		"lockSurvey": "Lock Survey",
+		"makePrivate": "Open to Public",
+		"makePublic": "Make Private",
+		"openSurvey": "View Survey",
+		"private": "Private",
+		"public": "Public",
+		"sharelink": "Copy Survey Link",
+		"surveyStatus": "Status",
+		"title": "Title",
+		"viewResult": "View Submissions"
+	},
+	"feedback": {
+		"modal": {
+			"text": "Leave your feedback",
+			"title": "Submit Feedback"
+		},
+		"title": "Feedback"
+	},
+	"language": {
+		"english": "English",
+		"german": "German"
+	},
+	"modal": {
+		"add": "Add",
+		"close": "Close",
+		"submit": "Submit"
+	},
+	"nabar": {
+		"studentlogin": "Student Login"
+	},
+	"navbar": {
+		"login": "Login",
+		"logout": "Logout",
+		"newSurvey": "New Survey",
+		"selectLanguage": "Select Language",
+		"title": "CoDiS Survey Tool"
+	},
+	"notification": {
+		"bacgroundcolor": "Background Color",
+		"edit": "Edit Notification",
+		"hideAfter": "Hide After",
+		"new": {
+			"notificationText": "Notification Text",
+			"title": "New Notification"
+		},
+		"newTag": "New Tag",
+		"notificationTitle": "Notification Title",
+		"relatedTags": "Related Tags",
+		"screenPosition": "Screen Position"
+	},
+	"notifications": {
+		"title": "Notifications"
+	},
+	"privacy": {
+		"select": "Select Privacy",
+		"title": "Privacy"
+	},
+	"retweeting": {
+		"title": "Retweeting"
+	},
+	"sentiment": {
+		"select": "Select Sentiment",
+		"title": "Sentiment"
+	},
+	"sharing": {
+		"title": "Sharing"
+	},
+	"survey": {
+		"AreYouSure": "Are you sure you want to delete the survey?",
+		"acceptTerms": "I accept the terms",
+		"actions": "Actions",
+		"addArticles": "Add Articles",
+		"addNewArticle": "Add new Article",
+		"articles": {
+			"title": "Articles"
+		},
+		"checkBeforeSave": "Check if your survey information is correct!",
+		"commentOnThisPost": "Comment on This Post",
+		"copiedtoClipboard": "Survey Link Copied to Clipboard",
+		"createEvaluation": "Create Evaluation",
+		"created": "Survey Created",
+		"deleted": "Survey Deleted",
+		"duplicated": "Survey Duplicated",
+		"description": "Description",
+		"dotasks": "Please finish the tasks",
+		"errorWhileCreating": "An Unexpected Error Occured While Creating Survey",
+		"evaluation": "Evaulation",
+		"finishSurveyToProceede": "Finish the survey to continue",
+		"finishAllTasks": "Mark all tasks as Done",
+		"information": "Information",
+		"notPublicOrNotFound": "Survey is not public or it does not exist",
+		"redirecting": "Redirecting to Survey",
+		"results": {
+			"bool": {
+				"false": "True",
+				"true": "False"
+			},
+			"count": "Count",
+			"horizontalBar": "Horizontal Bar",
+			"legend": "Legend",
+			"rating": "Rating",
+			"selectChart": "Select Chart",
+			"verticalBar": "Vertical Bar"
+		},
+		"retweetThisPost": "Retweet This Post",
+		"shareThisPost": "Share This Post",
+		"submittedText": "Your Submission Has Been Saved",
+		"surveyTask": "Survey Task",
+		"tasks": "Tasks",
+		"thankYouText": "Thank you for participating",
+		"thankYouTitle": "Thank you",
+		"title": "Title",
+		"youHavePosted": "You have posted!"
+	},
+	"tag": {
+		"title": "Tag"
+	},
+	"task": {
+		"add": "Add Task"
+	},
+	"tweeting": {
+		"title": "Tweeting"
+	}
+}

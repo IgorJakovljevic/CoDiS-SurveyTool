@@ -1,0 +1,19 @@
+<mat-card class="mat-elevation-z7">
+    <mat-card-header>
+        <mat-card-title> {{post.title}} </mat-card-title>
+        <mat-card-subtitle>{{post.source}}</mat-card-subtitle>
+        <mat-card-subtitle>
+            <ckeditor [disabled]="true" [config]="editorConfig" [editor]="Editor" [(ngModel)]="post.text"
+                name="post.text"></ckeditor>
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="card-body">
+        <mat-chip-list [selectable]="false">
+            <mat-chip *ngFor="let tag of post.tags">{{tag.text}}</mat-chip>
+        </mat-chip-list>
+        <div *ngIf="false" style="padding: 0px 1em 0px 1em ">
+            <mat-icon matTooltip="{{post.privacy.description}}">{{post.privacy.icon}}</mat-icon>
+        </div>
+    </mat-card-content>
+</mat-card>

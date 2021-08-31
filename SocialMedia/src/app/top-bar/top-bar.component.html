@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+    <button matTooltip="{{ 'navbar.title' | translate }}" [routerLink]="['/']" mat-icon-button>
+        <img class="logoIcon" src="assets/icons/logo.png" />
+    </button>
+    <span class="nav-spacer"></span>
+    <button *ngIf="isAuthenticated && isAdmin()" matTooltip="{{ 'navbar.newSurvey' | translate }}"
+        [routerLink]="['/surveycreate']" mat-icon-button>
+        <mat-icon>dynamic_form</mat-icon>
+    </button>
+    <button matTooltip="{{ 'navbar.selectLanguage' | translate }}" mat-icon-button [matMenuTriggerFor]="langMenu">
+        <mat-icon>language</mat-icon>
+    </button>
+    <button matTooltip="{{ 'navbar.logout' | translate }}" *ngIf="isAuthenticated" mat-icon-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+    </button>
+    <button matTooltip="{{ 'navbar.login' | translate }}" *ngIf="!isAuthenticated" mat-icon-button
+        [matMenuTriggerFor]="loginMenu">
+        <mat-icon>login</mat-icon>
+    </button>
+
+
+    <mat-menu #loginMenu="matMenu">
+        <button [routerLink]="['/studentlogin']" mat-menu-item>
+            <span translate>nabar.studentlogin</span>
+        </button>
+        <button [routerLink]="['/login']" mat-menu-item>
+            <span translate>navbar.login</span>
+        </button>
+    </mat-menu>
+
+    <mat-menu #langMenu="matMenu">
+        <button [ngClass]="{'active-language' : (currentLanugage() == 'en')}" (click)="useLanguage('en')" mat-menu-item>
+            <span translate>language.english</span>
+        </button>
+        <button [ngClass]="{'active-language' : currentLanugage() == 'de'}" (click)="useLanguage('de')" mat-menu-item>
+            <span translate>language.german</span>
+        </button>
+    </mat-menu>
+
+</mat-toolbar>

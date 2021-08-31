@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  social-media-eval:
+    image: social-media-eval
+    networks:
+      - default
+    ports:
+      - "4200:80"
+  social-media-eval-api:
+    image: social-media-eval-api
+    networks:
+      - default
+    ports:
+      - "8000:80"
+    environment:
+      - PYTHONPATH
+
+  pg_db:
+    image: postgres
+    volumes:
+      - pgsql-data:/var/lib/pgsql/data:rw
+    networks:
+      - default
+    ports:
+      - "5432:5432"
+    env_file:
+      - ../.env
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=d96sfA54iBbAYCzF4a
+      - POSTGRES_DB=survey_dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d survey_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+networks:
+  default:
+
+volumes:
+  pgsql-data:

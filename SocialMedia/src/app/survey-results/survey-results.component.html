@@ -1,0 +1,80 @@
+<div class="content-box" *ngIf="surveyJson">
+    <div *ngFor="let page of surveyJson.pages">
+        <h1>{{page.title}}</h1>
+        <p>{{page.description}}</p>
+
+
+        <div style="display: grid; width: 50%;" *ngFor="let element of page.elements">
+            <h2>{{element.title}}
+            </h2>
+
+
+            <div *ngIf="element.type === 'text' || element.type === 'comment'">
+                <mat-list role="list">
+                    <mat-list-item *ngFor="let result of element.results">
+                        {{result}}
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+            <div *ngIf="(element.type === 'boolean' || element.type === 'rating') && element.options">
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>
+                            <span translate>survey.results.selectChart</span>
+                        </mat-label>
+                        <mat-select [(value)]="element.options.type">
+                            <mat-option value="vertical-bar">
+                                <span translate>survey.results.verticalBar</span>
+                            </mat-option>
+                            <mat-option value="horizontal-bar">
+                                <span translate>survey.results.horizontalBar</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span>&nbsp;</span>
+
+                </div>
+                <ngx-charts-bar-vertical *ngIf="element.options.type=='vertical-bar'" [results]="element.results"
+                    [showXAxisLabel]="element.options.showXAxisLabel" [showYAxisLabel]="element.options.legend"
+                    [legend]="element.options.legend" [yAxisLabel]="element.options.yAxisLabel">
+                </ngx-charts-bar-vertical>
+
+                <ngx-charts-bar-horizontal *ngIf="element.options.type=='horizontal-bar'" [results]="element.results"
+                    [showXAxisLabel]="element.options.showXAxisLabel" [showYAxisLabel]="element.options.legend"
+                    [legend]="element.options.legend" [yAxisLabel]="element.options.yAxisLabel">
+                </ngx-charts-bar-horizontal>
+
+                <div>
+                    <mat-checkbox [(ngModel)]="element.options.legend">
+                        <span translate>survey.results.legend</span>
+                    </mat-checkbox>
+                </div>
+            </div>
+
+
+            <br />
+        </div>
+
+    </div>
+</div>
+<div class="content-box" *ngIf="survey.articles">
+    <div *ngFor="let article of survey.articles" role="listitem">
+        <h1>{{article.title}}</h1>
+        <div *ngFor="let post_data of evalPostData[article.id]">
+            <mat-card> {{post_data.text}}</mat-card>
+            <div>Comments</div>
+            <div>
+                <mat-list role="list">
+                    <mat-list-item *ngFor="let comment of post_data.comments">
+                        {{comment.text}}
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <mat-chip-list [selectable]="false">
+                <mat-chip *ngFor="let tag of post_data.tags">{{tag.text}}</mat-chip>
+            </mat-chip-list>
+            <hr>
+        </div>
+    </div>
+</div>

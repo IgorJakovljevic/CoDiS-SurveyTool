@@ -1,0 +1,147 @@
+<div style="padding: 2em;" *ngIf="survey && !completedSurvey">
+
+    <mat-horizontal-stepper (selectionChange)="selectionChange($event)" linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>
+                    <span translate>create.survey.information</span>
+                </ng-template>
+                <div class="full-width">
+                    {{survey.title}}
+                </div>
+                <div style="padding-top:1em" class="full-width" [innerHtml]="survey.description | safeHtml">
+                </div>
+                <div style="padding-top:1em" class="full-width">
+                    <mat-checkbox color="primary" formControlName="accept" required>
+                        <span translate>survey.acceptTerms</span>
+                    </mat-checkbox>
+                </div>
+                <div style="padding-top:3em;">
+                    <button mat-raised-button color="primary" matStepperNext>
+                        <span translate>action.next</span>
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [label]="post.id.toString()" *ngFor="let post of survey.articles; index as i;">
+            <ng-template matStepLabel>
+                <span translate>survey.surveyTask</span> {{i+1}}/{{survey.articles.length}}
+            </ng-template>
+
+            <mat-divider></mat-divider>
+            <mat-expansion-panel *ngIf="post.tasks && post.tasks.length > 0" [expanded]="true" [hideToggle]="false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span translate>survey.tasks</span>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-selection-list #taskList>
+                    <mat-list-option color="primary" (click)="toggleTaskDone(post.tasks[i])"
+                        *ngFor="let task of post.tasks; index as i;">
+                        {{task.text}}
+                    </mat-list-option>
+                </mat-selection-list>
+                <div style="text-align: right;">
+                    <button mat-raised-button color="primary" (click)="taskList.selectAll(); finishAllTaks(post)">
+                        <span translate>survey.finishAllTasks</span>
+                    </button>
+
+                </div>
+
+            </mat-expansion-panel>
+
+            <div class="padding-bottom:1em">&nbsp;</div>
+
+            <app-article [post]="post"></app-article>
+
+
+            <div *ngIf="getPost(post)?.doShare" style="margin-top:1em">
+                <strong translate>survey.youHavePosted</strong>
+            </div>
+
+
+            <div *ngIf="post.doComment && post.commenting" style="margin-top:1em">
+                <app-comment [comment]="comment" *ngFor="let comment of getComments(post)">
+                </app-comment>
+            </div>
+            <div style="padding-top:1em;">
+                <button matTooltip="{{ 'survey.commentOnThisPost' | translate }}"
+                    (click)="evaluateAction(post.commenting, createComment, post)" style="margin-right: 1em;"
+                    mat-raised-button color="primary">
+                    <i class="fas fa-comments"></i>
+                </button>
+
+                <button *ngIf="!getPost(post)?.doShare" matTooltip="{{ 'survey.shareThisPost' | translate }}"
+                    style="margin-right: 1em;" (click)="evaluateAction(post.sharing, createPost, post)"
+                    mat-raised-button color="primary">
+                    <i class="fab fa-facebook-square"></i>
+                </button>
+
+                <button matTooltip="{{ 'survey.retweetThisPost' | translate }}"
+                    (click)="evaluateAction(post.retweeting, createPost, post)" mat-raised-button color="primary">
+                    <i class="fas fa-retweet"></i>
+                </button>
+            </div>
+
+
+            <div style="padding-top:3em;">
+                <button style="margin-right: 1em;" mat-raised-button color="primary" matStepperPrevious>
+                    <span translate>action.back</span>
+                </button>
+                <button [disabled]="!checkTasksDone(post)" mat-raised-button color="primary" matStepperNext>
+                    <span *ngIf="!checkTasksDone(post)" translate>survey.dotasks</span>
+                    <span *ngIf="checkTasksDone(post)" translate>action.next</span>
+                </button>
+            </div>
+        </mat-step>
+
+
+        <mat-step *ngIf="survey.survey_json.length">
+            <ng-template matStepLabel>
+                <span translate>survey.evaluation</span>
+            </ng-template>
+            <div id='surveyElement'></div>
+            <div>
+                <button style="margin-right: 1em;" mat-raised-button color="primary" matStepperPrevious>
+                    <span translate>action.back</span>
+                </button>
+                <button [disabled]="!surveyDone" mat-raised-button color="primary" matStepperNext>
+                    <span *ngIf="!surveyDone" translate>survey.finishSurveyToProceede</span>
+                    <span *ngIf="surveyDone" translate>action.next</span>
+                </button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>
+                <span translate>survey.thankYouTitle</span>
+            </ng-template>
+            <p translate>survey.thankYouText</p>
+            <div>
+                <button style="margin-right: 1em;" mat-raised-button color="primary" matStepperPrevious>
+                    <span translate>action.back</span>
+                </button>
+                <button (click)="submitSurvey()" mat-raised-button color="primary">
+                    <span translate>action.submit</span>
+                </button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
+
+<div *ngIf="completedSurvey" style="text-align: center;">
+    <img class="endIcon" src="assets/icons/logo.png" />
+    <h1 translate>
+        survey.submittedText
+    </h1>
+</div>
+
+<div *ngIf="errorCode == 404" style="text-align: center;">
+    <img class="endIcon" src="assets/icons/logo.png" />
+    <h1 translate>
+        survey.notPublicOrNotFound
+    </h1>
+</div>

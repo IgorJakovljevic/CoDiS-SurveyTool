@@ -1,0 +1,177 @@
+{
+	"action": {
+		"back": "Zurück",
+		"codeMode": "Quellcode-Modus",
+		"comment": "Kommentieren",
+		"createSurvey": "Umfrage erstellen",
+		"delete": "Löschen",
+		"done": "Fertig",
+		"evaluation": "Bewertung",
+		"next": "Weiter",
+		"post": "GERMAN TRANSLATION",
+		"submit": "Absenden",
+		"tobeimplemented": "GERMAN TRANSLATION",
+		"updateSurvey": "Umfrage aktualisieren",
+		"viewSurvey": "Umfrage anzeigen"
+	},
+	"article": {
+		"new": {
+			"articleText": "Artikel Text",
+			"articleTitle": "Artikelüberschrift",
+			"newTag": "Neuer Tag",
+			"relatedtag": "Verwandte Tags",
+			"title": "Titel"
+		},
+		"whatsOnYourMind": "Was ist deine Meinung?"
+	},
+	"auth": {
+		"login": "Anmeldung",
+		"password": "Kennwort",
+		"provideValidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse an",
+		"provideValidPassword": "Bitte geben Sie ein gültiges Passwort an",
+		"username": "Benutzername",
+		"usernameOrPasswordWrong": "Benutzername oder Passwort falsch"
+	},
+	"comment": {
+		"edit": "Kommentar bearbeiten",
+		"whatDoYouThink": "GERMAN TRANSLATION"
+	},
+	"commenting": {
+		"title": "Kommentieren"
+	},
+	"create": {
+		"survey": {
+			"information": "Information",
+			"title": "Umfrage erstellen"
+		}
+	},
+	"dashboard": {
+		"actions": "Aktionen",
+		"deletesurvey": "Umfrage löschen",
+		"duplicatesurvey": "Umfrage Duplicate",
+		"editSurvey": "Umfrage bearbeiten",
+		"exportData": "Daten exportieren",
+		"lockSurvey": "Umfrage sperren",
+		"makePrivate": "TODO ",
+		"makePublic": "Für die Öffentlichkeit zugänglich",
+		"openSurvey": "Umfrage anzeigen",
+		"private": "Privat",
+		"public": "GERMAN TRANSLATION",
+		"sharelink": "Umfrage-Link kopieren",
+		"surveyStatus": "Status",
+		"title": "Titel",
+		"viewResult": "Daten anzeigen"
+	},
+	"feedback": {
+		"modal": {
+			"text": "",
+			"title": ""
+		},
+		"title": ""
+	},
+	"language": {
+		"english": "Englisch",
+		"german": "Deutsch"
+	},
+	"modal": {
+		"add": "Hinzufügen",
+		"close": "Schließen",
+		"submit": ""
+	},
+	"nabar": {
+		"studentlogin": "GERMAN TRANSLATION"
+	},
+	"navbar": {
+		"login": "Einloggen",
+		"logout": "Abmelden",
+		"newSurvey": "GERMAN TRANSLATION",
+		"selectLanguage": "Sprache auswählen",
+		"title": "CoDiS Survey Tool"
+	},
+	"notification": {
+		"bacgroundcolor": "Hintergrundfarbe",
+		"edit": "Benachrichtigung bearbeiten",
+		"hideAfter": "GERMAN TRANSLATION",
+		"new": {
+			"notificationText": "Benachrichtigungstext",
+			"title": "Neue Benachrichtigung"
+		},
+		"newTag": "GERMAN TRANSLATION",
+		"notificationTitle": "Benachrichtigungstitel",
+		"relatedTags": "Verwandte Tags",
+		"screenPosition": "Bildschirmposition"
+	},
+	"notifications": {
+		"title": "Benachrichtigungen"
+	},
+	"privacy": {
+		"select": "GERMAN TRANSLATION",
+		"title": "GERMAN TRANSLATION"
+	},
+	"retweeting": {
+		"title": "GERMAN TRANSLATION"
+	},
+	"sentiment": {
+		"select": "GERMAN TRANSLATION",
+		"title": "GERMAN TRANSLATION"
+	},
+	"sharing": {
+		"title": "GERMAN TRANSLATION"
+	},
+	"survey": {
+		"AreYouSure": "GERMAN TRANSLATION",
+		"acceptTerms": "Ich akzeptiere die Bedingungen",
+		"actions": "Aktionen",
+		"addArticles": "Artikel hinzufügen",
+		"addNewArticle": "Neuen Artikel hinzufügen",
+		"articles": {
+			"title": "Artikel"
+		},
+		"checkBeforeSave": "Überprüfen Sie, ob Ihre Umfrageinformationen korrekt sind!",
+		"commentOnThisPost": "GERMAN TRANSLATION",
+		"copiedtoClipboard": "Link In die Zwischenablage kopierter",
+		"createEvaluation": "Evaluation erstellen",
+		"created": "Umfrage erstellt",
+		"deleted": "Umfrage gelöscht",
+		"duplicated": "Umfrage duplicated",
+		"description": "GERMAN TRANSLATION",
+		"dotasks": "GERMAN TRANSLATION",
+		"errorWhileCreating": "Beim Erstellen einer Umfrage ist ein unerwarteter Fehler aufgetreten",
+		"evaluation": "GERMAN TRANSLATION",
+		"finishSurveyToProceede": "Beenden Sie die Umfrage, um fortzufahren",
+		"finishAllTasks": "GERMAN TRANSLATION",
+		"information": "GERMAN TRANSLATION",
+		"notPublicOrNotFound": "",
+		"redirecting": "Redirecting to Survey",
+		"results": {
+			"bool": {
+				"false": "",
+				"true": ""
+			},
+			"count": "",
+			"horizontalBar": "",
+			"legend": "",
+			"rating": "",
+			"selectChart": "",
+			"verticalBar": ""
+		},
+		"retweetThisPost": "Diesen Beitrag retweeten",
+		"shareThisPost": "Diesen Beitrag teilen",
+		"submittedText": "GERMAN TRANSLATION",
+		"surveyTask": "GERMAN TRANSLATION",
+		"tasks": "Aufgaben",
+		"thankYouText": "Danke für die Teilnahme",
+		"thankYouTitle": "Danke",
+		"title": "Titel",
+		"youHavePosted": "Du hast gepostet!"
+	},
+	"tag": {
+		"title": "Tag"
+	},
+	"task": {
+		"add": "Aufgabe hinzufügen"
+	},
+	"tweeting": {
+		"title": "Tweeting"
+	}
+}

@@ -1,0 +1,217 @@
+<div style="padding:1em;padding-bottom: 0;;" class="mat-title">
+    <span translate>create.survey.title</span>
+
+
+    <button *ngIf="surveyObject.id > 0" mat-raised-button color="primary" style="margin-left:1em; float:right;"
+        matTooltip="{{ 'dashboard.duplicatesurvey' | translate }}" (click)="duplicateSurvey()">
+        <mat-icon>content_copy</mat-icon>
+    </button>
+
+    <button *ngIf="surveyObject.id > 0" mat-raised-button color="primary" style="margin-left:1em; float:right;"
+        matTooltip="{{ 'dashboard.openSurvey' | translate }}" [routerLink]="['/survey', surveyObject.id]"
+        target="_blank">
+        <mat-icon>open_in_new</mat-icon>
+    </button>
+
+    <button *ngIf="surveyObject.id > 0" mat-raised-button color="warn" style="margin-left:1em; float:right;"
+        matTooltip="{{ 'dashboard.deletesurvey' | translate }}" (click)="deleteSurvey()">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
+<mat-vertical-stepper (selectionChange)="selectionChange($event)" linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>
+                <span translate>survey.information</span>
+            </ng-template>
+            <mat-form-field class="full-width">
+                <mat-label translate>survey.title</mat-label>
+                <input matInput placeholder="Survey !" formControlName="title" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label translate>survey.description</mat-label>
+                <textarea matInput placeholder="{{ 'survey.description' | translate }}" formControlName="description"
+                    required>
+                </textarea>
+            </mat-form-field>
+            <div>
+                <button mat-raised-button color="primary" matStepperNext>
+                    <span translate>action.next</span>
+                </button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>
+                <span translate>
+                    survey.addArticles
+                </span>
+            </ng-template>
+            <button style="margin-bottom:1em;" (click)="openDialog()" mat-raised-button>
+                <mat-icon>add_box</mat-icon>
+                <span translate>survey.addNewArticle</span>
+            </button>
+            <table mat-table [dataSource]="posts" *ngIf="posts.length" class="mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="Title">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>survey.articles.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Tags">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>tag.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-chip-list [selectable]="false">
+                            <mat-chip *ngFor="let tag of element.tags">{{tag.text}}</mat-chip>
+                        </mat-chip-list>
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Sentiment">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>sentiment.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+
+                        <mat-icon [style.color]="element.sentiment.color">{{element.sentiment.icon}}</mat-icon>
+
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Privacy">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>privacy.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon matTooltip="{{element.privacy.description}}">{{element.privacy.icon}}</mat-icon>
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Commenting">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>commenting.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-checkbox disabled [checked]="element.commenting"></mat-checkbox>
+                    </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="Sharing">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>sharing.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-checkbox disabled [checked]="element.sharing"></mat-checkbox>
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Notifications">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>notifications.title</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="full-width" style="margin-bottom: 0.5em;"
+                            *ngFor="let notification of element.notifications">
+                            <button (click)="editNotification(notification)"
+                                matTooltip="{{ 'notification.edit' | translate }} {{notification.title}}"
+                                mat-raised-button>
+                                <mat-icon>notifications_active</mat-icon>
+                            </button>
+                        </div>
+
+                        <button style="margin-left: 1em;" color="primary" (click)="addNotification(element)"
+                            mat-icon-button>
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="DeleteAction">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <span translate>survey.actions</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button style="margin-right: 1em;" color="warn" (click)="removePost(element)" mat-raised-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button (click)="editPost(element)" mat-raised-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div style="padding-top:3em;">
+                <button style="margin-right: 1em;" mat-raised-button color="primary" matStepperPrevious>
+                    <span translate>action.back</span>
+                </button>
+                <button mat-raised-button color="primary" matStepperNext>
+                    <span translate>action.next</span>
+                </button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [label]="'evaluation'">
+        <ng-template matStepLabel>
+            <span translate>action.evaluation</span>
+        </ng-template>
+        <button *ngIf="surveyObject.survey_json.trim().length == 0" mat-raised-button color="primary"
+            (click)="createEditor()">
+            <span translate>survey.createEvaluation</span></button>
+        <br *ngIf="surveyObject.survey_json.trim().length == 0" />
+        <br *ngIf="surveyObject.survey_json.trim().length == 0" />
+        <div id="surveyEditorContainer"></div>
+        <br /><br />
+
+        <div>
+            <button (click)="saveSurveyJson()" style="margin-right: 1em;" mat-raised-button color="primary"
+                matStepperPrevious>
+                <span translate>action.back</span>
+            </button>
+            <button (click)="saveSurveyJson()" mat-raised-button color="primary" matStepperNext>
+                <span translate>action.next</span>
+            </button>
+
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>
+            <span translate>action.done</span>
+        </ng-template>
+        <p translate>survey.checkBeforeSave</p>
+        <p></p>
+        <div>
+            <button style="margin-right: 1em;" mat-raised-button color="primary" matStepperPrevious>
+                <span translate>action.back</span>
+            </button>
+            <button *ngIf="surveyObject.id == 0" style="margin-right: 1em;" mat-raised-button color="primary"
+                (click)="createSurvey()">
+                <span translate>action.createSurvey</span>
+            </button>
+            <button *ngIf="surveyObject.id > 0" style="margin-right: 1em;" mat-raised-button color="primary"
+                (click)="createSurvey()">
+                <span translate>action.updateSurvey</span>
+            </button>
+            <a *ngIf="created" target="_blank" href="/surveypreview/{{surveyObject.id}}" mat-raised-button
+                color="primary" matStepperPrevious>
+                <span translate>action.viewSurvey</span>
+            </a>
+        </div>
+    </mat-step>
+</mat-vertical-stepper>

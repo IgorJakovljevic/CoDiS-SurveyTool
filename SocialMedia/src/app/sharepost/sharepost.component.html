@@ -1,0 +1,55 @@
+<mat-card class="mat-elevation-z0">
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content class="card-body">
+        <form class="full-width">
+            <mat-form-field class="full-width">
+                <textarea matInput [(ngModel)]="post.text" name="shareText"
+                    placeholder="{{ 'article.whatsOnYourMind' | translate }}"></textarea>
+            </mat-form-field>
+            <mat-form-field *ngIf="post.text.length > 0" class="full-width">
+                <mat-label translate>article.new.relatedtag</mat-label>
+                <mat-chip-list #tagList aria-label="Fruit selection">
+                    <mat-chip *ngFor="let tag of post.tags" [selectable]="selectable" [removable]="removable"
+                        (removed)="remove(tag)">
+                        {{tag.text}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="{{ 'article.new.articleText' | translate }}" #tagInput
+                        [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>{{post.privacy.icon}}</mat-icon>
+            <span>{{post.privacy.name}}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button (click)="setPrivacy(el)" *ngFor="let el of privacySelection" mat-menu-item>
+                <mat-icon>{{el.icon}}</mat-icon>
+                <span>{{el.name}} - {{el.description}}</span>
+            </button>
+        </mat-menu>
+        <!-- <button mat-button>
+            <mat-icon color="primary">photo_album</mat-icon>
+            <span>Photo/Video</span>
+        </button> -->
+        <button mat-button [matMenuTriggerFor]="menuSentiment">
+            <mat-icon [style.color]="post.sentiment.color">{{post.sentiment.icon}}</mat-icon>
+        </button>
+        <mat-menu #menuSentiment="matMenu">
+            <button (click)="setSentiment(el)" *ngFor="let el of sentiment" mat-menu-item>
+                <mat-icon [style.color]="el.color">{{el.icon}}</mat-icon>
+                <span> - {{el.description}}</span>
+            </button>
+        </mat-menu>
+        <button (click)="callBackFunction.emit(post)" mat-raised-button color="primary">
+            <span translate>action.post</span>
+        </button>
+    </mat-card-actions>
+</mat-card>
